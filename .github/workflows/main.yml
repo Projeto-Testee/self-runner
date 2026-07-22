@@ -1,0 +1,19 @@
+name: Fake Self Runner
+on: 
+    workflow_dispatch
+jobs:
+    teste:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Fake Task
+              run: echo "Teste self runner"
+            - uses: actions/checkout@v4
+            - name: Build and push Docker images
+              uses: docker/build-push-action@v6.3.0
+              with:
+                context: ./src
+                file: ./src/Dockerfile                
+                push: false
+                tags: | 
+                  fabricioveronez/self-runner:latest
+                
